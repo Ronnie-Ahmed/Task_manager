@@ -14,12 +14,17 @@
 > 4. Install the requirements
 >    > `pip install -r requirements.txt`
 > 5. modify `.env.example` to `.env` and add your database credentials
-> 6. Run the migrations
+>
+> ##
+>
+> > > > 6. If I haven't uploaded a folder named `media` then create a folder named `media` in the root directory
+>
+> ##
+>
+> 7. Run the migrations
 >    > `python manage.py migrate`
-> 7. Run the server
->    > `python manage.py runserver`
-> 8. Open the browser and go to `http://127.0.0.1:8000/`
-> 9. Enjoy
+> 8. Run the server
+>    > `python manage.py runserver` 9. Open the browser and go to `http://127.0.0.1:8000/` 10. Enjoy
 
 ## How to use
 
