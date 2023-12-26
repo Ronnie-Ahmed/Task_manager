@@ -1,0 +1,83 @@
+{% include "base.html" %}
+<style>
+  .popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #756e6e; /* Adjust the alpha (last value) for transparency */
+    backdrop-filter: blur(10px); /* Adjust the blur value for a glassy effect */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Adjust the shadow as needed */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Adjust the border color and transparency */
+  }
+
+  .popup-content {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .popup-content h1 {
+    color: #333;
+  }
+
+  .popup-content p {
+    margin: 10px 0;
+    color: #555;
+  }
+
+  .popup-content a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .popup-content input[type="submit"] {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+
+  .popup-content input[type="submit"]:hover {
+    background-color: #c82333;
+  }
+  .popup-content a.button {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .popup-content a.button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<div class="popup-container">
+  <div class="popup-content">
+    <h1>Delete the Task</h1>
+
+    <form method="post" autocomplete="off">
+      {% csrf_token %}
+      <p>Are you sure you want to delete the task? {{ object }}</p>
+      <a href="{% url 'Home' %}" class="button">Cancel</a>
+      <input type="submit" value="Submit" />
+    </form>
+  </div>
+</div>
+
+{% include "footer.html" %}

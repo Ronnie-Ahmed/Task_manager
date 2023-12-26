@@ -1,0 +1,130 @@
+{% include "base.html" %}
+
+<style>
+  body {
+    font-family: "Cyber", sans-serif; /* Replace "Cyber" with the desired font or font stack */
+    background-color: #5e5757; /* Change this to your desired shade of gray */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .container {
+    margin-top: 50px;
+    width: 50%;
+    padding: 20px;
+    background-color: rgba(
+      141,
+      131,
+      131,
+      0.8
+    ); /* Adjust alpha (last value) for transparency */
+    border-radius: 5px;
+    backdrop-filter: blur(
+      10px
+    ); /* This creates a blurred effect, adjust as needed */
+    box-shadow: 0 4px 8px rgba(245, 241, 241, 0.945),
+      0 8px 16px rgba(240, 236, 236, 0.993); /* White shadow effect */
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  .container.show {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  label {
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #189214;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgb(44, 146, 44); /* Add shadow to input fields */
+  }
+
+  input[type="submit"] {
+    background-color: #13dd1a85;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    border: 1px solid #fcfcfc;
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgb(245, 242, 242); /* Add shadow to submit button */
+  }
+
+  input[type="submit"]:hover {
+    background-color: #13ca1c;
+  }
+
+  .register-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  .register-link a {
+    color: #0516ff; /* Blue color, adjust as needed */
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    display: inline-block;
+  }
+
+  .register-link a:hover {
+    background-color: #007bff; /* Darker blue on hover, adjust as needed */
+    color: #fff; /* White text on hover, adjust as needed */
+  }
+</style>
+<script>
+  // You can add a class to the container element using JavaScript to trigger the pop-up effect.
+  document.addEventListener("DOMContentLoaded", function () {
+    const container = document.querySelector(".container");
+    container.classList.add("show");
+  });
+</script>
+
+<div class="container">
+  <h1>Login Form</h1>
+
+  <form method="post" autocomplete="off">
+    {% csrf_token %} {{ form.as_p }}
+
+    <input type="submit" value="Login" />
+  </form>
+
+  <div class="register-link">
+    <p>
+      Don't have an account? <a href="{% url 'Register' %}">Register here</a>.
+    </p>
+  </div>
+</div>
+
+{% include "footer.html" %}
