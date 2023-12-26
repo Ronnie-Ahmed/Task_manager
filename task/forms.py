@@ -6,7 +6,7 @@ from django import forms
 from django.forms.widgets import PasswordInput,TextInput
 from django.forms import DateTimeInput
 
-from .models import Task,Review,ImageModel
+from .models import Task,ImageModel
 
 class TaskForm(ModelForm):
     class Meta:
@@ -19,12 +19,7 @@ class TaskForm(ModelForm):
         }
        
         
-class ReviewForm(ModelForm):
-    class Meta:
-        model=Review
-        fields='__all__'
-        exclude = ['user']
-        
+   
 class CreateUserForm(UserCreationForm):
     class Meta:
         model=User

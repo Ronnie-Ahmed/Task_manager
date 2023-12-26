@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Task,Review,ProfilePic,ImageModel
-from .forms import TaskForm,ReviewForm,CreateUserForm,LoginForms,ImageForm
+from .models import Task,ImageModel
+from .forms import TaskForm,CreateUserForm,LoginForms,ImageForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.decorators import login_required
@@ -18,57 +18,11 @@ from rest_framework.response import Response
 @login_required(login_url='/login/')
 def Home(request):
     if request.user.is_authenticated:
-        tasks = Task.objects.filter(user=request.user)
-        reviews = Review.objects.all()
-        # profile=ProfilePic.objects.get(user=request.user)
-        context = {'tasks': tasks, 'reviews': reviews, 'username': request.user.username}
+        tasks = Task.objects.filter(user=request.user).order_by('priority')        
+        context = {'tasks': tasks,  'username': request.user.username}
         return render(request, 'index.html', context=context)
     else:
         return redirect('/login/')
-
-# class TaskListView(ListView):
-    model = Task
-    template_name ='index.html'
-    context_object_name = 'tasks'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['priorities'] = ['Low', 'Medium', 'High']
-        return context
-
-    def get_queryset(self):
-        queryset = Task.objects.all().order_by(F('priority').desc())
-        query = self.request.GET.get('q')
-        if query:
-            queryset = queryset.filter(
-                Q(title__icontains=query)
-            )
-
-        creation_date = self.request.GET.get('creation_date')
-        if creation_date:
-            queryset = queryset.filter(
-                creation_date__date=creation_date
-            )
-
-        due_date = self.request.GET.get('due_date')
-        if due_date:
-            queryset = queryset.filter(
-                due_date__date=due_date
-            )
-
-        priority = self.request.GET.get('priority')
-        if priority:
-            queryset = queryset.filter(
-                priority=priority
-            )
-
-        is_complete = self.request.GET.get('is_complete')
-        if is_complete == '1':
-            queryset = queryset.filter(is_complete=True)
-        elif is_complete == '0':
-            queryset = queryset.filter(is_complete=False)
-
-        return queryset  
       
     
 def search_tasks(request):
@@ -146,18 +100,7 @@ def CreateTask(request):
     context = {'form': form, 'imageform': imageform}
     return render(request, 'task_form.html', context=context)
 
-@login_required(login_url='/login/')
-def CreateReview(request):
-    form=ReviewForm()
-    
-    if request.method=='POST':
-        form=ReviewForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/')
-    context={'form':form}
-    
-    return render(request,'create_review.html',context=context)
+
 
 @login_required(login_url='/login/')
 def UpdateTask(request,pk):
@@ -199,7 +142,7 @@ def CreateUser(request):
         if form.is_valid():
             current_user=form.save(commit=False)
             form.save()
-            profile=ProfilePic.objects.create(user=current_user)
+            
             # task=form.save(commit=False)
             # task.user = request.user
             # # profile=ProfilePic.objects.create(user=task)
@@ -214,10 +157,6 @@ def user_logout(request):
     return  redirect('/')
 
 
-def ViewProfile_Pic(request):
-    profile=ProfilePic.objects.get(user=request.user)
-    context={'profile':profile}
-    return render(request,'index.html',context=context)
 
 
 def ViewTask(request,pk):

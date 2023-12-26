@@ -32,20 +32,6 @@ class Task(models.Model):
         return self.title
     
     
-class Review(models.Model):
-    review_name=models.CharField(max_length=200)
-    review_title=models.CharField(max_length=200)
-    rating=models.IntegerField()
-    task=models.ForeignKey(Task,on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return self.review_name
-
-
-class ProfilePic(models.Model):
-    user=models.ForeignKey(User,null=True,on_delete=models.CASCADE)
-    profile_pic=models.ImageField(null=True,blank=True,default='1.jpg')
-    
     
 class ImageModel(models.Model):
     task_id=models.ForeignKey(Task,on_delete=models.CASCADE,null=True, blank=True)

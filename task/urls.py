@@ -5,7 +5,6 @@ urlpatterns = [
     path('login/',views.LoginPage,name='Login'),
     path('register/',views.CreateUser,name='Register'),
     path('create/',views.CreateTask,name='CreateTask'),
-    path('review/',views.CreateReview,name='CreateReview'),
     path('update/<str:pk>/',views.UpdateTask,name='UpdateTask'),
     path('delete/<str:pk>/',views.DeleteTask,name='DeleteTask'),
     path('ViewTask/<str:pk>/',views.ViewTask,name='ViewTask'),
