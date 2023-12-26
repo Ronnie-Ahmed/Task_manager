@@ -2,6 +2,30 @@
 
 ## Video
 
+## Images
+
+### HomePage
+![Homepage](https://github.com/Ronnie-Ahmed/Task_manager/assets/68500792/a5a619f0-eeb0-405e-b6f8-9b514b3737d5)
+
+### Login Page
+![Login_Page](https://github.com/Ronnie-Ahmed/Task_manager/assets/68500792/9496d69e-e190-4498-92b6-08cc9214954f)
+
+### Register Page
+![Register_page](https://github.com/Ronnie-Ahmed/Task_manager/assets/68500792/a55ac4e5-2e41-47b3-a999-7dd146725b41)
+
+### View Task
+![ViewPAge](https://github.com/Ronnie-Ahmed/Task_manager/assets/68500792/b9158969-eb45-402f-b215-fe22c1f5783a)
+
+### Update Task
+![UpdateTask](https://github.com/Ronnie-Ahmed/Task_manager/assets/68500792/decb3cfe-b074-4d27-a5da-8c098f76e365)
+
+### Delete Task
+![Deletetask](https://github.com/Ronnie-Ahmed/Task_manager/assets/68500792/0a2ce139-4752-4005-83b4-f0945b8d59e6)
+
+### CreateTAskPAge
+![CreateTaskPage](https://github.com/Ronnie-Ahmed/Task_manager/assets/68500792/2a23affb-1761-427c-9043-a567691801aa)
+
+
 ## How to install
 
 > 1. Clone the repository
