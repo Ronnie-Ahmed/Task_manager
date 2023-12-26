@@ -15,7 +15,7 @@ db.sqlite3
 static/
 
 # Media files (user-uploaded content)
-media/
+
 
 # Virtual environment
 venv/

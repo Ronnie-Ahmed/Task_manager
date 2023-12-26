@@ -24,7 +24,7 @@ def Home(request):
     else:
         return redirect('/login/')
       
-    
+ @login_required(login_url='/login/')   
 def search_tasks(request):
     if request.method == 'POST':
         if request.user.is_authenticated:
@@ -34,7 +34,7 @@ def search_tasks(request):
         else:
             return render(request, 'index.html', {})
         
-        
+ @login_required(login_url='/login/')       
 def filter_tasks(request):
     if request.method == 'POST':
         filter_option = request.POST.get('filter_option', '')
@@ -124,6 +124,7 @@ def DeleteTask(reqeust,pk):
         
     return render(reqeust,'delete.html')
 
+@login_required(login_url='/login/')
 def ImageDelete(request,pk):
     image=ImageModel.objects.get(id=pk)
     taskid=image.task_id
@@ -158,14 +159,14 @@ def user_logout(request):
 
 
 
-
+@login_required(login_url='/login/')
 def ViewTask(request,pk):
     task=Task.objects.get(id=pk)
     images=ImageModel.objects.filter(task_id=task)
     context={'task':task,'images':images}
     return render(request,'view_task.html',context=context)
 
-
+@login_required(login_url='/login/')
 class TaskModelAPIView(APIView):
     def get(self,request,*args,**kwargs):
         snippet=Task.objects.all()
@@ -178,6 +179,7 @@ class TaskModelAPIView(APIView):
             serializers.save()
             return Response(serializers.data)
         return Response(serializers.errors)
+@login_required(login_url='/login/')
 class TaskApiVIew(APIView):
     def get_object(self,pk):
         try:
@@ -206,6 +208,7 @@ class TaskApiVIew(APIView):
 
 
 
+@login_required(login_url='/login/')
 class TaskGenericsAPIView(ListCreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskModelSerializers
@@ -219,6 +222,7 @@ class TaskGenericsAPIView(ListCreateAPIView):
         return self.list(request, *args, **kwargs)
     
 
+@login_required(login_url='/login/')
 class TaskModelDetailAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskModelSerializers
